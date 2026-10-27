@@ -1,12 +1,12 @@
 # Deployment Guide
 
-This document provides a -guide to IdeaVault's deployment architecture, first-time local machine setup, environment configuration, and execution of automated deployment commands for both backend (Heroku) and frontend (Vercel).
+This document describes the deployment architecture, first-time setup, environment configuration, and deployment commands for Ecommerce Operations on Heroku and Vercel.
 
 ---
 
 ## Deployment Architecture Overview
 
-IdeaVault uses a decoupled production hosting architecture:
+The repository supports a decoupled hosting setup. No hosting projects are assumed to exist; create and configure new services before deployment:
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -51,10 +51,11 @@ heroku login
 
 #### Step 2: Add Heroku Git Remote
 
-From the repository root (`idea-vault/`):
+From the repository root (`ecommerce-operations/`):
 
 ```bash
-heroku git:remote -a idea-vault
+heroku create <heroku-app-name>
+heroku git:remote -a <heroku-app-name>
 ```
 
 ---
@@ -78,9 +79,9 @@ vercel link
 
 When prompted:
 
-- **Set up and deploy?**: Choose **Yes** or link to existing project
-- **Which scope?**: Select your team/account (e.g., `belal-muhammads-projects`)
-- **Link to existing project?**: Select **Yes** and choose `idea-vault`
+- **Set up and deploy?**: Choose **Yes**
+- **Which scope?**: Select your team/account
+- **Link to existing project?**: Select **No** and create a new project with an available name
 
 This creates a local `.vercel/project.json` linking the workspace to the Vercel project.
 
@@ -88,7 +89,7 @@ This creates a local `.vercel/project.json` linking the workspace to the Vercel 
 
 ## Deployment Commands
 
-All deployments can be triggered directly from the repository root:
+After provisioning a new MongoDB database and configuring the API and web environment variables, deployments can be triggered from the repository root:
 
 | Command           | Target          | Action                                                                             |
 | ----------------- | --------------- | ---------------------------------------------------------------------------------- |
@@ -113,7 +114,7 @@ pnpm deploy:prod
 
 ## Routing & SPA Handling (Vercel)
 
-Single Page Applications (SPAs) that use client-side routers (like TanStack Router) require server rewrites so direct navigation and hard refreshes on non-root paths (e.g. `/ideas`, `/profile`, `/login`) do not result in `404 Not Found`.
+Single Page Applications (SPAs) that use client-side routers (like TanStack Router) require server rewrites so direct navigation and hard refreshes on non-root paths (e.g. `/profile`, `/login`, `/register`) do not result in `404 Not Found`.
 
 This is configured in [`web/vercel.json`](../web/vercel.json):
 
@@ -137,7 +138,7 @@ This is configured in [`web/vercel.json`](../web/vercel.json):
 To view live logs from the deployed NestJS API on Heroku:
 
 ```bash
-heroku logs --tail -a idea-vault
+heroku logs --tail -a <heroku-app-name>
 ```
 
 ### Verify Frontend Deployment

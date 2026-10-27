@@ -57,7 +57,7 @@ export class UsersService implements OnApplicationBootstrap {
     const defaultAdmin = {
       name: 'Belal Muhammad',
       email: 'belal@gmail.com',
-      password: 'Idea@2026',
+      password: 'Ecommerce@2026',
     };
 
     try {

@@ -1,10 +1,10 @@
-# IdeaVault Web Architecture
+# Ecommerce Operations Web Architecture
 
 This document is designed to help developers quickly understand our application structure, core concepts, conventions, and development workflows.
 
 ## Overview
 
-IdeaVault uses a **Simplified Feature-Sliced Design (FSD)** architecture. Traditional FSD uses 6 layers, but we use a pragmatic 4-layer approach to reduce cognitive load and boilerplate while retaining the benefits of modularity, co-location, and strict dependency flow.
+Ecommerce Operations uses a **Simplified Feature-Sliced Design (FSD)** architecture. Traditional FSD uses 6 layers, but we use a pragmatic 4-layer approach to reduce cognitive load and boilerplate while retaining the benefits of modularity, co-location, and strict dependency flow.
 
 Our core tech stack includes:
 
@@ -34,7 +34,7 @@ Our codebase is organized into four distinct layers. The golden rule of FSD is t
 
 ### 2. Features Layer (`src/features/`)
 
-**The Business Logic.** Contains domain-specific modules (slices) like `auth/` and `ideas/`.
+**The Business Logic.** Contains domain-specific modules (slices) such as `auth/`.
 
 - Everything related to a specific domain lives here: API calls, types, schemas, and feature-specific UI components.
 - We use **flat feature folders** (no internal `ui/`, `api/`, `model/` subdirectories).
@@ -45,7 +45,7 @@ Our codebase is organized into four distinct layers. The golden rule of FSD is t
 **The Assemblers.** Contains components that represent full views/screens.
 
 - Pages compose features and shared components to build a complete view.
-- E.g., `HomePage.tsx`, `IdeaDetailPage.tsx`.
+- E.g., `HomePage.tsx`, `ProfilePage.tsx`.
 - **Rule:** Can import from `features` and `shared`. Cannot import from `app` or other pages.
 
 ### 4. App Layer (`src/app/`)
@@ -57,7 +57,7 @@ Our codebase is organized into four distinct layers. The golden rule of FSD is t
 - Global layouts: `RootLayout.tsx`, `AuthenticatedLayout.tsx`, etc.
 - **Rule:** Can import from any layer. No layer should import from `app`.
 
-> **Note on Routing (`src/routes/`):** We use TanStack Router with **Flat File-based Routing**. Path hierarchies are represented using dot-separated filenames directly within the root `src/routes/` directory (e.g., `ideas.$ideaid.edit.tsx`), keeping the folder structure completely flat. Route files must remain **thin wrappers**. They only handle routing configuration (paths, loaders, auth guards) and delegate UI rendering directly to components in the `pages/` layer.
+> **Note on Routing (`src/routes/`):** We use TanStack Router with **Flat File-based Routing**. Path hierarchies are represented using dot-separated filenames directly within the root `src/routes/` directory (e.g., `_authenticated.profile.tsx`), keeping the folder structure completely flat. Route files must remain **thin wrappers**. They only handle routing configuration (paths, loaders, auth guards) and delegate UI rendering directly to components in the `pages/` layer.
 
 ---
 
@@ -72,11 +72,10 @@ src/
 │   ├── main.tsx          # React DOM render entry
 │   └── router.ts         # TanStack Router instance creation
 ├── features/             # Domain-specific slices
-│   ├── auth/             # Auth feature (login, register, context, schemas)
-│   └── ideas/            # Ideas feature (CRUD, API, schemas, cards, forms)
+│   └── auth/             # Login, register, context, schemas
 ├── pages/                # Page-level components
 │   ├── HomePage.tsx
-│   ├── IdeaDetailPage.tsx
+│   ├── ProfilePage.tsx
 │   └── ...
 ├── routes/               # TanStack Router definitions (Thin wrappers, flat file-based)
 │   ├── __root.tsx
@@ -84,12 +83,8 @@ src/
 │   ├── _auth.tsx
 │   ├── _auth.login.tsx
 │   ├── _auth.register.tsx
-│   ├── _protected.tsx
-│   ├── _protected.profile.tsx
-│   ├── ideas.index.tsx
-│   ├── ideas.new.tsx
-│   ├── ideas.$ideaid.index.tsx
-│   └── ideas.$ideaid.edit.tsx
+│   ├── _authenticated.tsx
+│   └── _authenticated.profile.tsx
 └── shared/               # Domain-agnostic reusable code
     ├── api/              # Base Axios client
     ├── config/           # React Query setup
@@ -107,15 +102,15 @@ src/
 
 To make tab navigation in your IDE easier, generic files within a feature must be prefixed with the feature name.
 
-- **Do:** `features/ideas/ideas-api.ts`, `features/auth/auth-schemas.ts`
-- **Don't:** `features/ideas/api.ts`, `features/auth/schemas.ts`
+- **Do:** `features/auth/auth-api.ts`, `features/auth/auth-schemas.ts`
+- **Don't:** `features/auth/api.ts`, `features/auth/schemas.ts`
 
 ### 2. No Barrels in Features
 
 We avoid `index.ts` barrel files inside features to prevent circular dependency issues and keep imports explicit. Import directly from the required file:
 
 ```typescript
-import { createIdea } from "@/features/ideas/ideas-api";
+import { login } from "@/features/auth/auth-api";
 ```
 
 ### 3. Thin Route Files

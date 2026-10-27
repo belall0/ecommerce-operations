@@ -15,8 +15,8 @@ const ALLOWED_TYPES_DESC = {
 };
 
 const EXAMPLES = [
-  'IV-2(refactor): remove user roles and administrative navigation',
-  'IV-15(feat): add create idea form',
+  'EO-2(refactor): remove user roles and administrative navigation',
+  'EO-15(feat): add account registration form',
 ];
 
 export function validateCommitMessage(message) {
@@ -81,7 +81,7 @@ export function validateCommitMessage(message) {
   } else {
     // Check if missing ticket ID or parens
     if (/^[a-zA-Z]+:\s*.+/.test(header) || /^\([a-zA-Z]+\):\s*.+/.test(header)) {
-      reasons.push('Missing <ticket-id>. Commits must start with a ticket ID (e.g. IV-15).');
+      reasons.push('Missing <ticket-id>. Commits must start with a ticket ID (e.g. EO-15).');
     } else if (!header.includes('(') || !header.includes(')')) {
       reasons.push('Missing type in parentheses. Format must be <ticket-id>(<type>): <description>.');
     } else if (!header.includes(':')) {

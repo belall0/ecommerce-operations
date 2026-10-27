@@ -1,6 +1,6 @@
 # Commit Message Conventions
 
-IdeaVault enforces strict commit message conventions to maintain a clean, readable, and auditable Git history linked directly to issue/ticket trackers.
+Ecommerce Operations enforces strict commit message conventions to maintain a clean, readable, and auditable Git history linked directly to issue/ticket trackers.
 
 ---
 
@@ -13,7 +13,7 @@ Every commit header must follow this exact structure:
 ```
 
 ```text
-  IV-15(feat): add create idea form
+  EO-15(feat): add account registration form
   └──┬─┘ └─┬─┘  └────────┬────────┘
      │     │             └─ Description (imperative mood, concise)
      │     └─────────────── Commit Type (feat, fix, refactor, perf, docs, test)
@@ -33,8 +33,8 @@ The validator automatically allows standard Git-generated messages:
 
 ## Examples
 
-- `IV-15(feat): add create idea form`
-- `IV-2(refactor): remove user roles and administrative navigation`
-- `IV-99(fix): resolve race condition in token refresh`
+- `EO-15(feat): add account registration form`
+- `EO-2(refactor): remove user roles and administrative navigation`
+- `EO-99(fix): resolve race condition in token refresh`
 
 ---

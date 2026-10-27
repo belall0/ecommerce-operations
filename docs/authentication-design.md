@@ -1,6 +1,6 @@
 # Authentication Design
 
-This document details the authentication and authorization design in IdeaVault, including token architecture, refresh token rotation, reuse detection, and client-side session management.
+This document details the authentication and authorization design in Ecommerce Operations, including token architecture, refresh token rotation, reuse detection, and client-side session management.
 
 ---
 

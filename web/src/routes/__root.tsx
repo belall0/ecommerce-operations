@@ -7,11 +7,11 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   head: () => ({
     meta: [
       {
-        title: "Your Idea Hub",
+        title: "Ecommerce Operations",
       },
       {
         name: "description",
-        content: "Share, explore and build ",
+        content: "Ecommerce operations management system",
       },
     ],
   }),

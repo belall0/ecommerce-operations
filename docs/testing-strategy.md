@@ -1,6 +1,6 @@
 # Testing Strategy
 
-This document outlines the testing approach, frameworks, test suites, and assertions used in IdeaVault.
+This document outlines the testing approach, frameworks, test suites, and assertions used in Ecommerce Operations.
 
 ---
 
@@ -28,7 +28,6 @@ All automated backend tests are **end-to-end (e2e)**. Each test suite spins up a
 | Suite      | File                     | Cases | Description                          |
 | ---------- | ------------------------ | ----- | ------------------------------------ |
 | Auth       | `test/auth.e2e-spec.ts`  | ~50   | Registration, login, refresh, logout |
-| Ideas      | `test/ideas.e2e-spec.ts` | ~40   | CRUD, ownership, visibility          |
 | Users      | `test/users.e2e-spec.ts` | ~10   | Admin bootstrap, user profiles       |
 | App health | `test/app.e2e-spec.ts`   | Smoke | Health check & app bootstrap         |
 

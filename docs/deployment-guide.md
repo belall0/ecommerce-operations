@@ -33,11 +33,13 @@ Before running deployments from a new machine or environment, complete the one-t
 
 Ensure the following tools are installed:
 
-- **Node.js** ≥ 22
-- **pnpm** ≥ 10 (`npm install -g pnpm`)
+- **Node.js** exactly 24.22.1 LTS
+- **pnpm** exactly 12.15.0 (`npm install -g pnpm@12.15.0`)
 - **Git**
 - **Heroku CLI** (`npm install -g heroku` or OS package manager)
 - **Vercel CLI** (`npm install -g vercel`)
+
+Use the exact versions in the root `package.json` for local development and builds. Configure the Vercel project to use the Node 24 runtime line; Vercel manages its exact production patch version. Heroku reads the exact Node engine from the root manifest.
 
 ---
 
@@ -108,7 +110,7 @@ pnpm deploy:prod
 ```
 
 > [!NOTE]
-> `deploy` is a reserved built-in command in `pnpm` (used for isolating workspace packages). Always use `pnpm deploy:all` or explicitly use `pnpm run deploy` to trigger the full deployment pipeline.
+> Use `pnpm deploy:all` or `pnpm run deploy` for the full deployment pipeline. In pnpm 12, the existing `deploy` script takes precedence over the built-in command.
 
 ---
 

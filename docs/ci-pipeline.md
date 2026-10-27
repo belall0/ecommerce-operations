@@ -24,11 +24,11 @@ The pipeline is organized into **parallel jobs** to minimize run time and provid
 
 ## Pipeline Jobs
 
-| Job               | Description                               | Environment / Services                                                                  | Execution Steps                                        |
-| ----------------- | ----------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| **Lint**          | Lints both API and Web workspaces         | `ubuntu-latest`<br>Node.js 22, pnpm 10                                                  | `pnpm --filter api lint`<br>`pnpm --filter web lint`   |
-| **Build**         | Typechecks and produces production builds | `ubuntu-latest`<br>Node.js 22, pnpm 10                                                  | `pnpm --filter api build`<br>`pnpm --filter web build` |
-| **Backend Tests** | Runs full backend E2E test suites         | `ubuntu-latest`<br>Node.js 22, pnpm 10<br>`mongo:7.0` service container (`27017:27017`) | `pnpm test:api:e2e`                                    |
+| Job               | Description                               | Environment / Services                                                                            | Execution Steps                                                                            |
+| ----------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Lint**          | Lints both API and Web workspaces         | `ubuntu-latest`<br>Node.js 24.22.1, pnpm 12.15.0                                                  | `pnpm --filter api exec eslint "{src,apps,libs,test}/**/*.ts"`<br>`pnpm --filter web lint` |
+| **Build**         | Typechecks and produces production builds | `ubuntu-latest`<br>Node.js 24.22.1, pnpm 12.15.0                                                  | `pnpm --filter api build`<br>`pnpm --filter web build`                                     |
+| **Backend Tests** | Runs full backend E2E test suites         | `ubuntu-latest`<br>Node.js 24.22.1, pnpm 12.15.0<br>`mongo:7.0` service container (`27017:27017`) | `pnpm test:api:e2e`                                                                        |
 
 ---
 
@@ -65,3 +65,9 @@ services:
 ## Dependency Caching
 
 All jobs take advantage of `pnpm/action-setup@v4` coupled with `actions/setup-node@v4` using `cache: 'pnpm'` and `pnpm install --frozen-lockfile` for fast and reproducible dependency installation.
+
+## Pinned toolchain
+
+All jobs read the exact Node version from root `package.json` through `actions/setup-node` and the exact pnpm version from `packageManager` through `pnpm/action-setup`. The workspace rejects incompatible engines and mismatched pnpm versions. API lint runs without `--fix`, so CI does not rewrite source files.
+
+Change runtime pins deliberately, regenerate the lockfile with the new pnpm version, and rerun install, lint, type, build, and e2e checks together.

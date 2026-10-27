@@ -22,5 +22,16 @@
   "devDependencies": {
     "husky": "^9.1.7"
   },
-  "packageManager": "pnpm@10.33.0"
+  "engines": {
+    "node": "24.22.1",
+    "pnpm": "12.15.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.22.1",
+      "onFail": "error"
+    }
+  },
+  "packageManager": "pnpm@12.15.0"
 }

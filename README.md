@@ -50,9 +50,9 @@ See [web architecture](web/ARCHITECTURE.md) for frontend conventions.
 
 ## Development Setup
 
-Requires Node.js 22 or later, pnpm 10, and MongoDB. No existing database or hosting project is assumed.
+Requires exactly Node.js 24.22.1 LTS, pnpm 12.15.0, and MongoDB. Node and pnpm version mismatches are rejected by the project. No existing database or hosting project is assumed.
 
-1. Install dependencies from the repository root:
+1. Install Node.js 24.22.1 LTS and pnpm 12.15.0 (`npm install --global pnpm@12.15.0`), then install dependencies from the repository root:
 
    ```sh
    pnpm install
@@ -101,6 +101,7 @@ Backend e2e tests require a dedicated `TEST_DB_URL` database: the suites drop th
 ## Documentation
 
 - [Deployment guide](docs/deployment-guide.md): configure new Heroku, Vercel, and MongoDB services before deploying.
+- [Dependency upgrades](docs/dependency-upgrades.md): pinned tooling, compatibility decisions, and validation.
 - [CI pipeline](docs/ci-pipeline.md): lint, build, and backend tests.
 - [Authentication design](docs/authentication-design.md): token rotation and client session lifecycle.
 - [Testing strategy](docs/testing-strategy.md): e2e approach and retained coverage.

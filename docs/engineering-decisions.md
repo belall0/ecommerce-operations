@@ -1,6 +1,6 @@
 # Engineering Decisions
 
-This document captures key architectural and technical trade-offs made in IdeaVault and the reasoning behind them.
+This document captures key architectural and technical trade-offs made in Ecommerce Operations and the reasoning behind them.
 
 ---
 

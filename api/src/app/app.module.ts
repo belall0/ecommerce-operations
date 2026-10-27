@@ -7,7 +7,6 @@ import { UsersModule } from '../users/users.module';
 import { AuthModule } from '../auth/auth.module';
 import { AppConfigModule } from '../app-config/app-config.module';
 import { AppConfigService } from '../app-config/app-config.service';
-import { IdeasModule } from '../ideas/ideas.module';
 
 @Module({
   imports: [
@@ -28,7 +27,6 @@ import { IdeasModule } from '../ideas/ideas.module';
     UsersModule,
     AuthModule,
     AppConfigModule,
-    IdeasModule,
   ],
   providers: [
     {

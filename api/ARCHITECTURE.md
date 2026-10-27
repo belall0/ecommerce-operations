@@ -1,6 +1,6 @@
-# IdeaVault API Architecture & Conventions
+# Ecommerce Operations API Architecture & Conventions
 
-This document outlines the core architectural patterns, project-specific conventions, and development workflows for the IdeaVault backend.
+This document outlines the core architectural patterns, project-specific conventions, and development workflows for the Ecommerce Operations backend.
 
 ---
 
@@ -42,13 +42,9 @@ getProfile(@GetUser() user: AuthenticatedUser) {
 }
 ```
 
-### 5. Standalone CLI Seeding
+### 5. Development User Bootstrap
 
-Database seeding logic lives in `src/seed.ts` outside the app runtime:
-
-- Run via `pnpm seed` or `pnpm seed:reset`.
-- **Idempotent**: Skips existing entries unless `--clean` / `--reset` is provided.
-- **Default Admin Auto-Creation**: Non-production environments auto-create a default admin account on initial boot (`CREATE_DEFAULT_ADMIN=true`).
+Non-production environments create a default development user on initial boot when `CREATE_DEFAULT_ADMIN=true`. This is handled by `UsersService`; there is no standalone seed command.
 
 ---
 
@@ -79,17 +75,6 @@ Every endpoint must be tested across 4 lenses:
 | `POST /auth/logout`   | No            | Revokes session from DB. Clears `refreshToken` cookie.                                  |
 
 Rate limit: 10 requests / 60s on `register` and `login`. `refresh` allows 100 / 60s.
-
-### Ideas — `GET|POST|PUT|DELETE /api/ideas/*`
-
-| Endpoint            | Auth Required | Description                                        |
-| ------------------- | ------------- | -------------------------------------------------- |
-| `GET /ideas`        | No            | List all public ideas. Supports `?userId=` filter. |
-| `GET /ideas/me`     | JWT           | List only the authenticated user's ideas.          |
-| `GET /ideas/:id`    | No            | Get a single idea by ID.                           |
-| `POST /ideas`       | JWT           | Create a new idea (owned by current user).         |
-| `PUT /ideas/:id`    | JWT           | Update idea (enforces `userId` ownership).         |
-| `DELETE /ideas/:id` | JWT           | Delete idea (enforces `userId` ownership).         |
 
 ### Users — `GET /api/users/*`
 

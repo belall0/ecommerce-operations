@@ -1,7 +1,7 @@
 {
-  "name": "idea-vault",
+  "name": "ecommerce-operations",
   "version": "1.0.0",
-  "description": "Idea Vault - Collection of ideas",
+  "description": "Ecommerce operations management system",
   "type": "module",
   "scripts": {
     "dev:api": "pnpm --filter api start:dev",

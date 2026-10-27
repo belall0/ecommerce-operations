@@ -1,12 +1,12 @@
 # Continuous Integration Pipeline
 
-This document outlines the GitHub Actions CI pipeline architecture, triggers, workflow jobs, and services used in IdeaVault.
+This document outlines the GitHub Actions CI pipeline architecture, triggers, workflow jobs, and services used in Ecommerce Operations.
 
 ---
 
 ## Overview
 
-IdeaVault uses **GitHub Actions** ([`.github/workflows/ci.yml`](../.github/workflows/ci.yml)) to validate every push and pull request against the `main` and `develop` branches.
+Ecommerce Operations uses **GitHub Actions** ([`.github/workflows/ci.yml`](../.github/workflows/ci.yml)) to validate every push and pull request against the `main` and `develop` branches.
 
 The pipeline is organized into **parallel jobs** to minimize run time and provide fast feedback to developers.
 
@@ -24,11 +24,11 @@ The pipeline is organized into **parallel jobs** to minimize run time and provid
 
 ## Pipeline Jobs
 
-| Job | Description | Environment / Services | Execution Steps |
-| --- | ----------- | ---------------------- | --------------- |
-| **Lint** | Lints both API and Web workspaces | `ubuntu-latest`<br>Node.js 22, pnpm 10 | `pnpm --filter api lint`<br>`pnpm --filter web lint` |
-| **Build** | Typechecks and produces production builds | `ubuntu-latest`<br>Node.js 22, pnpm 10 | `pnpm --filter api build`<br>`pnpm --filter web build` |
-| **Backend Tests** | Runs full backend E2E test suites | `ubuntu-latest`<br>Node.js 22, pnpm 10<br>`mongo:7.0` service container (`27017:27017`) | `pnpm test:api:e2e` |
+| Job               | Description                               | Environment / Services                                                                  | Execution Steps                                        |
+| ----------------- | ----------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| **Lint**          | Lints both API and Web workspaces         | `ubuntu-latest`<br>Node.js 22, pnpm 10                                                  | `pnpm --filter api lint`<br>`pnpm --filter web lint`   |
+| **Build**         | Typechecks and produces production builds | `ubuntu-latest`<br>Node.js 22, pnpm 10                                                  | `pnpm --filter api build`<br>`pnpm --filter web build` |
+| **Backend Tests** | Runs full backend E2E test suites         | `ubuntu-latest`<br>Node.js 22, pnpm 10<br>`mongo:7.0` service container (`27017:27017`) | `pnpm test:api:e2e`                                    |
 
 ---
 
@@ -53,12 +53,12 @@ services:
 
 ### Test Environment Variables
 
-| Variable | Value / Purpose |
-| --- | --- |
-| `NODE_ENV` | `test` |
-| `TEST_DB_URL` | `mongodb://localhost:27017/ideavault-test` |
-| `JWT_SECRET` | Secret key used for signing JWTs during test execution |
-| `FRONTEND_URL` | `http://localhost:5173` |
+| Variable       | Value / Purpose                                        |
+| -------------- | ------------------------------------------------------ |
+| `NODE_ENV`     | `test`                                                 |
+| `TEST_DB_URL`  | `mongodb://localhost:27017/ecommerce-operations-test`  |
+| `JWT_SECRET`   | Secret key used for signing JWTs during test execution |
+| `FRONTEND_URL` | `http://localhost:5173`                                |
 
 ---
 

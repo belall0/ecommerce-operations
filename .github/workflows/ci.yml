@@ -98,7 +98,7 @@ jobs:
       - name: Run backend E2E tests
         env:
           NODE_ENV: test
-          TEST_DB_URL: mongodb://localhost:27017/ideavault-test
+          TEST_DB_URL: mongodb://localhost:27017/ecommerce-operations-test
           JWT_SECRET: WdzQLKz9JQDG3QgVMDf7GsKwwgTxcZOr8aTcG8LMEyK
           FRONTEND_URL: http://localhost:5173
         run: pnpm test:api:e2e

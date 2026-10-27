@@ -3,6 +3,8 @@ export class AppOptions {
   public createDefaultAdmin = process.env.CREATE_DEFAULT_ADMIN !== 'false';
   public dbUrl =
     this.nodeEnv === 'test'
-      ? (process.env.TEST_DB_URL ?? 'mongodb://localhost:27017/ideavault-test')
-      : (process.env.DB_URL ?? 'mongodb://localhost:27017/ideavault');
+      ? (process.env.TEST_DB_URL ??
+        'mongodb://localhost:27017/ecommerce-operations-test')
+      : (process.env.DB_URL ??
+        'mongodb://localhost:27017/ecommerce-operations');
 }

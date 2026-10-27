@@ -1,5 +1,5 @@
 import { Link, useMatchRoute } from "@tanstack/react-router";
-import { House, User, LogOut, ChevronsUpDown, Lightbulb } from "lucide-react";
+import { House, User, LogOut, ChevronsUpDown, ShoppingBag } from "lucide-react";
 
 import {
   Sidebar,
@@ -49,15 +49,17 @@ export default function AppSidebar() {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild tooltip="IdeaVault">
+            <SidebarMenuButton size="lg" asChild tooltip="Ecommerce Operations">
               <Link to="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500 dark:bg-amber-500/20">
-                  <Lightbulb className="size-4" />
+                  <ShoppingBag className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">IdeaVault</span>
+                  <span className="truncate font-semibold">
+                    Ecommerce Operations
+                  </span>
                   <span className="text-muted-foreground truncate text-xs">
-                    Your Idea Hub
+                    Operations Management
                   </span>
                 </div>
               </Link>
